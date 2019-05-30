@@ -53,7 +53,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-player = Player(room['outside'])
+player = Player("IVB", room['outside'])
 
 # Write a loop that:
 #
@@ -66,32 +66,32 @@ player = Player(room['outside'])
 #
 # If the user enters "q", quit the game.
 
-def change_rooms(player_input):
-    current_location = None
-    for nickname, info in room.items():
-        if info.name == player.current_room:
-            current_location = nickname
-    print(f"The player selected to go {player_input} from {current_location}")
 
-directions = ["n", "s", "e", "w"]
 
-print(f"\nDescription: {player.room.description}")
+# def change_rooms(player_input):
+#     current = None
+#     method = player_input + '_to'
+#     for name, info in room.items():
+#         if info.name == player.room:
+#             current = name
+#     print(f"The player selected to go {player_input} from {current}")
+#     # print(getattr(room, f"{player_input}" + "_to"))
+#     print(getattr(room, 'n_to'))
+
+commands = ["n", "s", "e", "w"]
+
+# print(f"\nDescription: {player.room.description}")
 
 while True:
-    print(f"\nYour Location: {player.room.name}")
+    print(f"\n--------------------\n\nCurrent Location: {player.room.name}")
     print(f"\nDescription: {player.room.description}")
-    command = input("\nSelect your next move: ")
-    # print(f"\nWhat would you like to do?")
+    command = input("\nSelect your move: ")
     if command == "q":
-        print(f"\nSee ya later!\n")
+        print(f"\nGoodbye.\n")
         break
-    elif command in directions:
-        # print(f"You clicked {command}! Well done, you get a cookie.\n")
-        change_rooms(command)
-        # Logic to move in that direction
+    elif command in commands:
+        player.handle_command(command)
     elif command == "help":
-        print("No help available right now, sorry bud.\n")
-        # Output strings in the format [selection] - "description"
-        # eg: "n" - Move north
+        print("\nNo help available right now, sorry bud.")
     else:
-        print(f"\nInvalid selection - please try again, or type \"help\" for more options.\n")
+        print(f"\nInvalid selection - Try again, or type \"help\" for more options.\n")
