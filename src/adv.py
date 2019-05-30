@@ -66,31 +66,17 @@ player = Player("IVB", room['outside'])
 #
 # If the user enters "q", quit the game.
 
-
-
-# def change_rooms(player_input):
-#     current = None
-#     method = player_input + '_to'
-#     for name, info in room.items():
-#         if info.name == player.room:
-#             current = name
-#     print(f"The player selected to go {player_input} from {current}")
-#     # print(getattr(room, f"{player_input}" + "_to"))
-#     print(getattr(room, 'n_to'))
-
 commands = ["n", "s", "e", "w"]
 
-# print(f"\nDescription: {player.room.description}")
-
 while True:
-    print(f"\n--------------------\n\nCurrent Location: {player.room.name}")
-    print(f"\nDescription: {player.room.description}")
+    print(player.room)
     command = input("\nSelect your move: ")
     if command == "q":
         print(f"\nGoodbye.\n")
         break
     elif command in commands:
         player.handle_command(command)
+        player.room.get_exits()
     elif command == "help":
         print("\nNo help available right now, sorry bud.")
     else:
