@@ -50,9 +50,9 @@ room['treasure'].s_to = room['narrow']
 
 # Define Items
 
-rock = Item("rock", "A rock that's great for breaking stuff.")
+rock = Item("rock", "Great for bashing stuff.")
 torch = Item("torch", "Don't burn yourself!")
-key = Item("key", "I wonder what this is used for..")
+key = Item("key", "I wonder what this is used for...")
 potion = Item("potion", "Good for your health! (+10 HP)")
 plumbus = Item("plumbus", "Have you ever seen how these things are made?")
 coin = Item("coin", "Currency of the Derp Empire. (+10 Derps)")
@@ -103,15 +103,14 @@ while True:
     elif command == "items":
         player.room.list_items()
     elif command == "grab":
-        if player.room.items is not None:
-            item = input("Item to pick up: ")
-            player.grab_item(item)
-        else:
-            print("No items in this room.")
-        # grab an item in current room
+        item = input("\nItem to pick up: ")
+        player.grab_item(item)
     elif command == "drop":
-        player.room.list_items()
+        item = input("\nItem to lose: ")
+        player.drop_item(item)
         # drop an item from your inventory
+    elif command == "inventory":
+        player.list_inventory()
     elif command == "help":
         print("\nNo help available right now, sorry bud.")
     else:
