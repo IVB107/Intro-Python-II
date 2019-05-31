@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -47,6 +48,28 @@ room['tower'].s_to = room['tunnel']
 room['tunnel'].n_to = room['tower']
 room['treasure'].s_to = room['narrow']
 
+# Define Items
+
+rock = Item("rock", "A rock that's great for breaking stuff.")
+torch = Item("torch", "Don't burn yourself!")
+key = Item("key", "I wonder what this is used for..")
+potion = Item("potion", "Good for your health! (+10 HP)")
+plumbus = Item("plumbus", "Have you ever seen how these things are made?")
+coin = Item("coin", "Currency of the Derp Empire. (+10 Derps)")
+dagger = Item("dagger", "This looks like it could do some damage!")
+rope = Item("rope", "Never know when you'll need some rope, I guess.")
+
+room['outside'].items.append(rock)
+room['outside'].items.append(potion)
+room['foyer'].items.append(torch)
+room['dungeon'].items.append(key)
+room['dungeon'].items.append(coin)
+room['narrow'].items.append(potion)
+room['overlook'].items.append(plumbus)
+room['tower'].items.append(coin)
+room['tunnel'].items.append(dagger)
+room['treasure'].items.append(rope)
+
 #
 # Main
 #
@@ -67,9 +90,9 @@ player = Player("IVB", room['outside'])
 # If the user enters "q", quit the game.
 
 commands = ["n", "s", "e", "w"]
+print(player.room)
 
 while True:
-    print(player.room)
     command = input("\nSelect your move: ")
     if command == "q":
         print(f"\nGoodbye.\n")
@@ -77,6 +100,18 @@ while True:
     elif command in commands:
         player.handle_command(command)
         player.room.get_exits()
+    elif command == "items":
+        player.room.list_items()
+    elif command == "grab":
+        if player.room.items is not None:
+            item = input("Item to pick up: ")
+            player.grab_item(item)
+        else:
+            print("No items in this room.")
+        # grab an item in current room
+    elif command == "drop":
+        player.room.list_items()
+        # drop an item from your inventory
     elif command == "help":
         print("\nNo help available right now, sorry bud.")
     else:
