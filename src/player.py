@@ -35,6 +35,5 @@ class Player:
             print(f"KEY_VALUE: {key_value}")
             if item == key_value[0]:
                 self.inventory.remove(thing)
-                print(f"\nDropped: {thing}")
+                print(f"\nDropped: {item}")
                 self.room.add_item(key_value[0], key_value[1])
-        # print(f"\nDropped {item.name} (but not really)")
